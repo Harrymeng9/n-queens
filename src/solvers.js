@@ -124,7 +124,7 @@ var queensHelper = function (n, currRow, placedQueens) {
   for (var col = 0; col < n; col++) {
     var isSafe = true;
     if (placedQueens.length !== 0) {
-      for (var i = 0; i < currRow; i++) { // used to be placedQueens.length
+      for (var i = 0; i < placedQueens.length; i++) {
         if (placedQueens[i] === col || (i - placedQueens[i]) === (currRow - col) || (i + placedQueens[i]) === (currRow + col)) {
           isSafe = false;
         }
@@ -132,7 +132,7 @@ var queensHelper = function (n, currRow, placedQueens) {
     }
 
     if (isSafe) {
-      var potentialPlacedQueens = placedQueens;
+      var potentialPlacedQueens = placedQueens.slice();
       potentialPlacedQueens.push(col);
       if (potentialPlacedQueens.length < n) {
         var potentialSolution = queensHelper(n, currRow + 1, potentialPlacedQueens);
@@ -149,7 +149,9 @@ var queensHelper = function (n, currRow, placedQueens) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0; //fixme
+
+
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
